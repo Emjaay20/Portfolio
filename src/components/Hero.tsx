@@ -18,16 +18,16 @@ export default function Hero() {
                 </div>
 
                 <div className="max-w-4xl">
-                    <h1 className="text-swiss-charcoal tracking-tighter text-5xl sm:text-7xl font-bold leading-[0.9] mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                    <h1 className="text-black tracking-tighter text-5xl sm:text-7xl font-bold leading-[0.9] mb-8 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                         Product Engineering <br />
-                        <span className="text-international-orange">Systems Research.</span>
-                        <span className="text-international-orange">& Software Architecture.</span>
+                        <span className="text-blue-900">Systems Research</span><br />
+                        <span className="text-international-orange"> Software Architecture.</span>
                     </h1>
 
                     <div className="max-w-lg animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                         <p className="text-swiss-charcoal/70 text-base sm:text-lg font-medium leading-relaxed mb-8">
-                            I design and build secure, scalable, and interpretable systems—combining
-                            product strategy, software architecture, and research-driven
+                            I design and build secure, scalable, and interpretable systems combining
+                            product strategy, software architecture, and research driven
                             engineering.
                         </p>
 

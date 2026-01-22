@@ -1,5 +1,44 @@
 @import "tailwindcss";
 
+@theme {
+  --color-swiss-bg: #F9F9F7;
+  --color-swiss-charcoal: #1A1A1A;
+  --color-international-orange: #FF4F00;
+  --color-swiss-gray: #E5E5E1;
+  --color-swiss-gray-dark: #D1D1CD;
+
+  --font-display: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono), monospace;
+
+  --background-image-grid-pattern: linear-gradient(to right, #E5E5E1 1px, transparent 1px), linear-gradient(to bottom, #E5E5E1 1px, transparent 1px);
+
+  --animate-fade-in-up: fade-in-up 0.5s ease-out forwards;
+  --animate-reveal: reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-spin-slow: spin 3s linear infinite;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal {
+    0% {
+      width: 0%;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+}
+
 :root {
   --primary: #ff4f00;
   --bg: #f9f9f7;
