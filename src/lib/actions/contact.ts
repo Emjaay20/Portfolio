@@ -3,6 +3,8 @@
 import { db } from '@/lib/db';
 import { contacts } from '@/lib/schema';
 import { Resend } from 'resend';
+import { headers } from 'next/headers';
+import { and, eq, gt } from 'drizzle-orm';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -15,15 +17,40 @@ export async function submitContact(
         const email = formData.get('email') as string;
         const message = formData.get('message') as string;
 
+        const ip = (await headers()).get('x-forwarded-for') || 'unknown';
+        const honeypot = formData.get('_gotcha');
+
+        if (honeypot) {
+            // calculated delay to trick bots
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            return { success: true };
+        }
+
         if (!email || !message) {
             return { success: false, error: 'Email and message are required.' };
         }
 
-        // 1️⃣ Save to database (source of truth)
+        // Rate limiting: 1 submission per minute
+        const oneMinuteAgo = new Date(Date.now() - 60 * 1000);
+        const recentSubmissions = await db
+            .select()
+            .from(contacts)
+            .where(
+                and(
+                    eq(contacts.ipAddress, ip),
+                    gt(contacts.createdAt, oneMinuteAgo)
+                )
+            );
+
+        if (recentSubmissions.length > 0) {
+            return { success: false, error: 'You are doing that too much. Please try again later.' };
+        }
+
         await db.insert(contacts).values({
             name,
             email,
             message,
+            ipAddress: ip,
         });
 
         // 2️⃣ Email YOU
@@ -50,6 +77,9 @@ export async function submitContact(
         <p>— Yusuf</p>
       `,
         });
+
+        const { logEvent } = await import('@/lib/analytics');
+        await logEvent('contact_submit', '/contact');
 
         return { success: true };
     } catch (error) {

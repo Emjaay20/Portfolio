@@ -1,13 +1,13 @@
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import CaseStudyList from "@/components/CaseStudyList";
 import SystemsPhilosophy from "@/components/SystemsPhilosophy";
 import Footer from "@/components/Footer";
+import { logEvent } from "@/lib/analytics";
 
-export default function Home() {
+export default async function Home() {
+  await logEvent('page_view', '/');
   return (
     <main className="min-h-screen bg-swiss-bg selection:bg-international-orange selection:text-white">
-      <Header />
       <Hero />
       <CaseStudyList />
       <SystemsPhilosophy />

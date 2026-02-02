@@ -12,6 +12,8 @@ export const metadata = {
     "Designing and building product-grade systems with engineering rigor and research depth.",
 };
 
+import ConditionalHeader from "@/components/ConditionalHeader";
+
 export default function RootLayout({
   children,
 }: {
@@ -20,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="bg-swiss-bg text-swiss-charcoal selection:bg-international-orange selection:text-white">
+        <ConditionalHeader />
         {children}
       </body>
     </html>

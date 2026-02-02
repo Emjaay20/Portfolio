@@ -12,7 +12,7 @@ export default function ContactPage() {
     const [state, action, isPending] = useActionState(submitContact, initialState);
 
     return (
-        <div className="max-w-xl mx-auto px-6 py-24">
+        <div className="max-w-xl mx-auto px-6 py-24 animate-fade-in-up">
             <h1 className="text-3xl font-bold mb-8">Contact</h1>
 
             {state.success ? (
@@ -59,6 +59,13 @@ export default function ContactPage() {
                 >
                     {isPending ? 'Sending...' : 'Send message'}
                 </button>
+                <input
+                    name="_gotcha"
+                    type="text"
+                    style={{ display: 'none' }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                />
             </form>
         </div>
     );

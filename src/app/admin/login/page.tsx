@@ -40,6 +40,7 @@ export default function AdminLogin() {
                 <input
                     type="password"
                     placeholder="Admin secret"
+                    aria-label="Admin secret"
                     value={secret}
                     onChange={(e) => setSecret(e.target.value)}
                     className="w-full border p-2 mb-4"

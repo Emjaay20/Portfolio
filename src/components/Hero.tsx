@@ -32,7 +32,10 @@ export default function Hero() {
                         </p>
 
                         <div className="flex gap-4">
-                            <button className="px-6 py-3 bg-swiss-charcoal text-swiss-bg text-xs font-bold uppercase tracking-widest hover:bg-international-orange transition-colors duration-300">
+                            <button
+                                className="px-6 py-3 bg-swiss-charcoal text-swiss-bg text-xs font-bold uppercase tracking-widest hover:bg-international-orange transition-colors duration-300"
+                                aria-label="Scroll to view selected works"
+                            >
                                 View Selected Works
                             </button>
                         </div>
