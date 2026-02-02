@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
     return (
         <section className="relative pt-32 pb-24 px-6 min-h-[60vh] flex flex-col justify-center border-b border-swiss-charcoal/5">
@@ -32,12 +34,13 @@ export default function Hero() {
                         </p>
 
                         <div className="flex gap-4">
-                            <button
+                            <Link
+                                href="/case-studies"
                                 className="px-6 py-3 bg-swiss-charcoal text-swiss-bg text-xs font-bold uppercase tracking-widest hover:bg-international-orange transition-colors duration-300"
                                 aria-label="Scroll to view selected works"
                             >
                                 View Selected Works
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

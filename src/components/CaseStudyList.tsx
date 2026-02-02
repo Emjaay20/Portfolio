@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const PROJECTS = [
     {
@@ -93,10 +94,13 @@ export default function CaseStudyList() {
                 </div>
 
                 <div className="mt-12 flex justify-center">
-                    <button className="group flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-swiss-charcoal hover:text-international-orange transition-colors">
+                    <Link
+                        href="/case-studies"
+                        className="group flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-swiss-charcoal hover:text-international-orange transition-colors"
+                    >
                         View Archive
                         <span className="block w-4 h-[1px] bg-current transition-all group-hover:w-8" />
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>
