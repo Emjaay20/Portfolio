@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { blogPosts } from '@/lib/schema';
 import { desc } from 'drizzle-orm';
 import { deleteBlogPost } from './actions';
+import { DeletePostButton } from '@/components/admin-blog-delete-button';
 
 export default async function BlogAdminPage() {
     // Fetch posts
@@ -60,19 +61,7 @@ export default async function BlogAdminPage() {
                                         Edit
                                     </a>
                                     <span className="text-muted-foreground">|</span>
-                                    <form action={deleteBlogPost.bind(null, post.id)} className="inline">
-                                        <button
-                                            type="submit"
-                                            className="text-sm text-red-500 hover:text-red-700"
-                                            onClick={(e) => {
-                                                if (!confirm('Are you sure?')) {
-                                                    e.preventDefault();
-                                                }
-                                            }}
-                                        >
-                                            Delete
-                                        </button>
-                                    </form>
+                                    <DeletePostButton id={post.id} />
                                 </td>
                             </tr>
                         ))}
