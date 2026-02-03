@@ -35,11 +35,12 @@ export default function Hero() {
 
                         <div className="flex gap-4">
                             <Link
-                                href="/case-studies"
-                                className="px-6 py-3 bg-swiss-charcoal text-swiss-bg text-xs font-bold uppercase tracking-widest hover:bg-international-orange transition-colors duration-300"
-                                aria-label="Scroll to view selected works"
+                                href="/blog"
+                                className="px-6 py-3 bg-swiss-charcoal text-swiss-bg text-xs font-bold uppercase tracking-widest hover:bg-international-orange transition-colors duration-300 flex items-center gap-2"
+                                aria-label="Read journals and publications"
                             >
-                                View Selected Works
+                                Read Journals & Publications
+                                <span className="text-xl leading-none">→</span>
                             </Link>
                         </div>
                     </div>

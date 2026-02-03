@@ -3,35 +3,34 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const PROJECTS = [
-    {
-        id: "01",
-        title: "FlowMeet",
-        role: "Founding Engineer",
-        year: "2024",
-        description: "Automated meeting scheduling & lead routing infrastructure.",
-        tags: ["Next.js", "Supabase", "System Architecture"],
-    },
-    {
-        id: "02",
-        title: "Nexus Theme",
-        role: "Product Architect",
-        year: "2023",
-        description: "Hybrid WordPress/React framework for high-scale publishers.",
-        tags: ["PHP", "React", "Core Web Vitals"],
-    },
-    {
-        id: "03",
-        title: "Identity Verifier",
-        role: "System Designer",
-        year: "2025",
-        description: "Secure identity verification plugin with biometric checks.",
-        tags: ["Security", "API Design", "Compliance"],
-    },
-];
+interface Project {
+    id: string;
+    title: string;
+    slug: string;
+    role: string;
+    year: string;
+    description: string;
+    tags: string[];
+    image: string;
+}
 
-export default function CaseStudyList() {
+export default function CaseStudyList({ initialProjects }: { initialProjects: Project[] }) {
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+
+    // Fallback if no specific projects passed (e.g. during development/transition)
+    const projects = initialProjects && initialProjects.length > 0 ? initialProjects : [
+        {
+            id: "01",
+            title: "FlowMeet",
+            slug: "flowmeet",
+            role: "Founding Engineer",
+            year: "2024",
+            description: "Automated meeting scheduling & lead routing infrastructure.",
+            tags: ["Next.js", "Supabase"],
+            image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2574&auto=format&fit=crop"
+        },
+        // ... (keep minimal fallback)
+    ];
 
     return (
         <section className="py-24 px-6 border-b border-swiss-charcoal/5 bg-swiss-bg">
@@ -46,32 +45,47 @@ export default function CaseStudyList() {
                 </div>
 
                 <div className="flex flex-col">
-                    {PROJECTS.map((project) => (
-                        <div
+                    {projects.map((project) => (
+                        <Link
                             key={project.id}
-                            className="group relative border-t border-swiss-charcoal/10 py-12 transition-colors hover:bg-white/40"
+                            href={`/case-studies/${project.slug}`}
+                            className="group relative border-t border-swiss-charcoal/10 py-12 block transition-all duration-500 hover:py-16"
                             onMouseEnter={() => setHoveredProject(project.id)}
                             onMouseLeave={() => setHoveredProject(null)}
                         >
-                            <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-6 relative z-10">
+                            {/* Background Image on Hover */}
+                            <div
+                                className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 overflow-hidden pointer-events-none"
+                            >
+                                <div className="absolute inset-0 bg-black/40 z-10" /> {/* Dark overlay for text readability */}
+                                <img
+                                    src={project.image}
+                                    alt=""
+                                    className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700 ease-out"
+                                />
+                            </div>
+
+                            <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-6 relative z-10 pointer-events-none">
                                 <div className="flex items-baseline gap-6 md:w-1/3">
-                                    <span className="font-mono text-xs text-international-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span className={`font-mono text-xs transition-colors duration-300 ${hoveredProject === project.id ? 'text-white/70' : 'text-international-orange opacity-0 group-hover:opacity-100'}`}>
                                         {project.id}
                                     </span>
-                                    <h3 className="text-2xl font-bold text-swiss-charcoal transition-transform duration-300 group-hover:translate-x-2">
+                                    <h3
+                                        className={`text-2xl transition-all duration-300 group-hover:translate-x-2 ${hoveredProject === project.id ? 'text-white font-black text-3xl md:text-4xl' : 'text-swiss-charcoal font-bold'}`}
+                                    >
                                         {project.title}
                                     </h3>
                                 </div>
 
                                 <div className="md:w-1/3">
-                                    <p className="text-sm text-swiss-charcoal/60 mb-2 font-medium">
+                                    <p className={`text-sm mb-2 font-medium transition-colors duration-300 ${hoveredProject === project.id ? 'text-white/90' : 'text-swiss-charcoal/60'}`}>
                                         {project.description}
                                     </p>
                                     <div className="flex flex-wrap gap-2">
                                         {project.tags.map((tag) => (
                                             <span
                                                 key={tag}
-                                                className="text-[10px] uppercase tracking-wider text-swiss-charcoal/40 font-mono"
+                                                className={`text-[10px] uppercase tracking-wider font-mono transition-colors duration-300 ${hoveredProject === project.id ? 'text-white/60' : 'text-swiss-charcoal/40'}`}
                                             >
                                                 {tag}
                                             </span>
@@ -80,15 +94,15 @@ export default function CaseStudyList() {
                                 </div>
 
                                 <div className="flex flex-col items-end md:w-1/3 gap-1 text-right">
-                                    <span className="text-xs font-bold uppercase tracking-widest text-swiss-charcoal">
+                                    <span className={`text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${hoveredProject === project.id ? 'text-white' : 'text-swiss-charcoal'}`}>
                                         {project.role}
                                     </span>
-                                    <span className="font-mono text-xs text-swiss-charcoal/40">
+                                    <span className={`font-mono text-xs transition-colors duration-300 ${hoveredProject === project.id ? 'text-white/60' : 'text-swiss-charcoal/40'}`}>
                                         {project.year}
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                     <div className="border-t border-swiss-charcoal/10" />
                 </div>
@@ -96,7 +110,7 @@ export default function CaseStudyList() {
                 <div className="mt-12 flex justify-center">
                     <Link
                         href="/case-studies"
-                        className="group flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-swiss-charcoal hover:text-international-orange transition-colors"
+                        className="group flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-swiss-charcoal hover:text-international-orange transition-colors cursor-pointer"
                     >
                         View Archive
                         <span className="block w-4 h-[1px] bg-current transition-all group-hover:w-8" />

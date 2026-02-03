@@ -36,6 +36,11 @@ export default async function AdminLayout({
                     <Link href="/admin/analytics" className="block hover:underline">
                         Analytics
                     </Link>
+                    <div className="pt-4 mt-4 border-t border-gray-100">
+                        <a href="/admin/logout" className="block text-red-500 hover:text-red-700 hover:underline">
+                            Logout
+                        </a>
+                    </div>
                 </nav>
             </aside>
 
