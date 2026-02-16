@@ -1,12 +1,13 @@
 import Hero from "@/components/Hero";
 import CaseStudyList from "@/components/CaseStudyList";
 import SystemsPhilosophy from "@/components/SystemsPhilosophy";
-import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import { logEvent } from "@/lib/analytics";
 import { db } from '@/lib/db';
 import { caseStudies } from '@/lib/schema';
 import { desc, eq } from 'drizzle-orm';
+
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   await logEvent('page_view', '/');
@@ -46,7 +47,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      <Footer />
     </main>
   );
 }

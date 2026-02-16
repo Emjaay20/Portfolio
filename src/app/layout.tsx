@@ -13,6 +13,7 @@ export const metadata = {
 };
 
 import ConditionalHeader from "@/components/ConditionalHeader";
+import ConditionalFooter from "@/components/ConditionalFooter";
 
 export default function RootLayout({
   children,
@@ -21,9 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="bg-swiss-bg text-swiss-charcoal selection:bg-international-orange selection:text-white">
+      <body className="bg-swiss-bg text-swiss-charcoal selection:bg-international-orange selection:text-white min-h-screen flex flex-col">
         <ConditionalHeader />
-        {children}
+        <main className="flex-1 w-full">
+          {children}
+        </main>
+        <ConditionalFooter />
       </body>
     </html>
   );
