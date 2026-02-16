@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { logEvent } from '@/lib/analytics';
 import { Metadata } from 'next';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 export async function generateMetadata({
     params,
@@ -109,8 +111,8 @@ export default async function CaseStudyDetail({
                     </div>
                 </header>
 
-                <div className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-800 whitespace-pre-wrap font-sans text-gray-800 leading-relaxed">
-                    {cs.content}
+                <div className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-800 font-sans text-gray-800 leading-relaxed">
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>{cs.content}</ReactMarkdown>
                 </div>
             </div>
         </article>

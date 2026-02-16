@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { logEvent } from '@/lib/analytics';
 import { Metadata } from 'next';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 export async function generateMetadata({
     params,
@@ -117,8 +119,8 @@ export default async function BlogPostPage({
                     )}
                 </header>
 
-                <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-p:leading-relaxed prose-p:text-gray-700 whitespace-pre-wrap font-serif">
-                    {post.content}
+                <div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-p:leading-relaxed prose-p:text-gray-700 font-serif">
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
                 </div>
             </div>
         </article>
