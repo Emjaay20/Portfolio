@@ -43,12 +43,18 @@ export async function createCaseStudy(formData: FormData) {
     });
 
     revalidatePath('/admin/case-studies');
+    revalidatePath('/case-studies');
+    revalidatePath('/case-studies/[slug]', 'page');
+    revalidatePath('/');
     redirect('/admin/case-studies');
 }
 
 export async function deleteCaseStudy(id: number) {
     await db.delete(caseStudies).where(eq(caseStudies.id, id));
     revalidatePath('/admin/case-studies');
+    revalidatePath('/case-studies');
+    revalidatePath('/case-studies/[slug]', 'page');
+    revalidatePath('/');
 }
 
 export async function updateCaseStudy(formData: FormData) {
@@ -85,5 +91,8 @@ export async function updateCaseStudy(formData: FormData) {
         .where(eq(caseStudies.id, id));
 
     revalidatePath('/admin/case-studies');
+    revalidatePath('/case-studies');
+    revalidatePath('/case-studies/[slug]', 'page');
+    revalidatePath('/');
     redirect('/admin/case-studies');
 }

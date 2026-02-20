@@ -41,6 +41,9 @@ export async function createBlogPost(formData: FormData) {
     });
 
     revalidatePath('/admin/blog');
+    revalidatePath('/blog');
+    revalidatePath('/blog/[slug]', 'page');
+    revalidatePath('/');
     redirect('/admin/blog');
 }
 
@@ -78,10 +81,16 @@ export async function updateBlogPost(formData: FormData) {
         .where(eq(blogPosts.id, id));
 
     revalidatePath('/admin/blog');
+    revalidatePath('/blog');
+    revalidatePath('/blog/[slug]', 'page');
+    revalidatePath('/');
     redirect('/admin/blog');
 }
 
 export async function deleteBlogPost(id: number) {
     await db.delete(blogPosts).where(eq(blogPosts.id, id));
     revalidatePath('/admin/blog');
+    revalidatePath('/blog');
+    revalidatePath('/blog/[slug]', 'page');
+    revalidatePath('/');
 }
