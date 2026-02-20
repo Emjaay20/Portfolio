@@ -8,7 +8,7 @@ export default async function BlogPage() {
 
     return (
         <div className="container mx-auto px-4 py-16 md:py-24 animate-fade-in-up">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-6xl mx-auto">
                 <header className="mb-16">
                     <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Writing</h1>
                     <p className="text-xl text-gray-600 leading-relaxed">
@@ -16,10 +16,10 @@ export default async function BlogPage() {
                     </p>
                 </header>
 
-                <div className="space-y-12">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {posts.map((post) => (
                         <article key={post.slug} className="group cursor-pointer">
-                            <Link href={`/blog/${post.slug}`} className="block">
+                            <Link href={`/blog/${post.slug}`} className="flex flex-col h-full bg-white border rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-black/20">
                                 <span className="text-sm text-gray-400 mb-2 block">
                                     {new Date(post.createdAt!).toLocaleDateString('en-US', {
                                         month: 'long',
@@ -44,7 +44,7 @@ export default async function BlogPage() {
                                         {post.excerpt}
                                     </p>
                                 )}
-                                <div className="text-sm font-medium text-black group-hover:underline flex items-center">
+                                <div className="mt-auto text-sm font-medium text-black group-hover:underline flex items-center">
                                     Read Article
                                     <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <line x1="5" y1="12" x2="19" y2="12"></line>

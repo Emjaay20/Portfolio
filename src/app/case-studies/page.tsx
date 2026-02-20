@@ -13,13 +13,13 @@ export default async function CaseStudiesPage() {
 
     return (
         <div className="container mx-auto px-4 py-12 md:py-20 animate-fade-in-up">
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Case Studies</h1>
                 <p className="text-xl text-gray-600 mb-12">
                     Deep dives into recent projects and technical challenges.
                 </p>
 
-                <div className="grid gap-8 md:grid-cols-2">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {caseStudies.map((cs: any) => (
                         <Link
                             key={cs.slug}
